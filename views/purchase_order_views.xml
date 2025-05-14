@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend Purchase Order Tree View -->
+    <record id="purchase_order_tree_custom" model="ir.ui.view">
+        <field name="name">purchase.order.tree.custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="after">
+                <field name="x_total_with_tax"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Extend Purchase Order Form View -->
+    <record id="purchase_order_form_custom" model="ir.ui.view">
+        <field name="name">purchase.order.form.custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="x_total_with_tax" widget="monetary"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend Purchase Order Line Tree View -->
+    <record id="purchase_order_line_tree_custom" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree.custom</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="price_subtotal" position="after">
+                <field name="x_line_total_with_tax" widget="monetary"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Extend Purchase Order Form Line Tree View -->
+    <record id="purchase_order_line_form_custom" model="ir.ui.view">
+        <field name="name">purchase.order.line.form.custom</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                <field name="x_line_total_with_tax" widget="monetary"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
